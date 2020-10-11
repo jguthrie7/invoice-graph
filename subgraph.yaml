@@ -1,27 +1,26 @@
 specVersion: 0.0.2
-description: Gravatar for Ethereum
-repository: https://github.com/graphprotocol/example-subgraph
+description: Invoice
+repository: https://github.com/jguthrie7/invoice-graph
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Gravity
+    name: Invoice
     network: mainnet
     source:
-      address: '0x2E645469f354BB4F5c8a05B3b30A929361cf77eC'
-      abi: Gravity
+      address: '0x52dE8D3fEbd3a06d3c627f59D56e6892B80DCf12'
+      abi: Invoice
+      startBlock: 8175406
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.3
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Gravatar
+        - XXX
       abis:
-        - name: Gravity
-          file: ./abis/Gravity.json
+        - name: Invoice
+          file: ./abis/Invoice.json
       eventHandlers:
-        - event: NewGravatar(uint256,address,string,string)
-          handler: handleNewGravatar
-        - event: UpdatedGravatar(uint256,address,string,string)
-          handler: handleUpdatedGravatar
+        - event: PaymentAccepted(indexed bytes32,indexed address,uint256,uint256)
+          handler: handlePaymentAccepted
       file: ./src/mapping.ts
